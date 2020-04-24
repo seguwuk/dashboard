@@ -19,8 +19,12 @@
     "@angular/platform-browser": "~8.1.0",
     "@angular/platform-browser-dynamic": "~8.1.0",
     "@angular/router": "~8.1.0",
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@types/highcharts": "^5.0.36",
+    "angular-highcharts": "^9.0.9",
     "bootstrap": "^4.3.1",
-    "chartist": "^0.11.4",
+    "highcharts": "^8.0.4",
+    "highcharts-angular": "^2.4.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

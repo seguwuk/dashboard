@@ -1,0 +1,30 @@
+{
+    "extratos": [
+        {
+            "nome": "Restaurantes",
+            "tipo": "Compra",
+            "valor": "120.00"
+        },
+        {
+            "nome": "Mercado",
+            "tipo": "Compra",
+            "valor": "400.30"  
+          },
+          {
+            "nome": "Freelancer",
+            "tipo": "Venda",
+            "valor": "800.00"  
+          },
+          {
+            "nome": "Salario",
+            "tipo": "Venda",
+            "valor": "7000.00"  
+          },
+        
+        {
+            "nome": "Combustível",
+            "tipo": "Compra",
+            "valor": "100.05"
+        }
+    ]
+}
