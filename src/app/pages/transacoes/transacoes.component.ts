@@ -28,7 +28,7 @@ export class TransacoesComponent implements OnInit {
     this.service.getData().subscribe(success => {
       this.page = success
       console.log(success)
-      this.setForm();
+      // this.setForm();
     },
       err => {
         console.log(err)
@@ -59,6 +59,10 @@ export class TransacoesComponent implements OnInit {
 
 
 
+  }
+
+  consoleForm(){
+    console.log(this.formExtrato.value)
   }
 
 

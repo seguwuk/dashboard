@@ -12,6 +12,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { ChartModule } from 'angular-highcharts';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgxCurrencyModule } from "ngx-currency";
 
 
 @NgModule({
@@ -29,10 +30,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     HighchartsChartModule,
     ChartModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxCurrencyModule
   ],
   providers: [
-    ExtratosService
+    ExtratosService,
    
   ],
   bootstrap: [AppComponent]

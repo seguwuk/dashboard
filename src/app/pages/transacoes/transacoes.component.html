@@ -5,21 +5,24 @@
 
     <p class="title">Nova transação</p>
 
-    <div class="form-group">
+    <div class="form-group" [formGroup]="formExtrato">
 
         <label for="transação">Tipo de transação</label>
-       <select class="form" name="" id="">
+       <select class="form"  formControlName="tipo" (change)= "consoleForm()">
+        <option value="" disabled selected hidden>Selecione um tipo</option>
          <option value="Compra">Compra</option>
-         <option value="Venbda">Venda</option>
+         <option value="Venda">Venda</option>
        </select>
 
         <label for="mercadoria">Nome da mercadoria</label>
-        <input type="text" class="form" placeholder="Input">
+        <input type="text" class="form" placeholder="Input" formControlName="nome" (change)= "consoleForm()">
 
         <label for="valor">Valor</label>
-        <input type="text" class="form"  placeholder="R$ 0,00">
+        <input type="text" class="form"  placeholder="R$ 0,00" 
+        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" 
+        formControlName="valor" (change)= "consoleForm()">
 
-        <div class="btn btn-primary mt-4 "> Adicionar Transação</div>
+        <div class="btn btn-primary mt-4 " (click) = "onSubmit()"> Adicionar Transação</div>
     </div>
 
 </div>
@@ -37,31 +40,19 @@ Extrato de transações
     <table class="table">
         <thead>
           <tr>
-            <th>#</th>
-            <th>First</th>
-            <th>Last</th>
-            <th>Handle</th>
+            <th></th>
+            <th>Mercadoria</th>
+            <th>Valor</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+          <tr *ngFor=" let p of page">
+          <td *ngIf="p.tipo === 'Compra'"> <i class="fas fa-minus"></i> </td>
+          <td *ngIf="p.tipo === 'Venda'">  <i class="fas fa-plus"></i> </td>
+          <td> {{p.nome}}</td>
+          <td> {{p.valor | currency:'R$' }}</td>
           </tr>
-          <tr>
-            <th>2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+         
         </tbody>
       </table>
 </div>
