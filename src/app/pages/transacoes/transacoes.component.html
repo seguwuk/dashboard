@@ -1,61 +1,62 @@
 <div class="row p-4">
 
-<div class="col">
-<div class="card">
+  <div class="col-5">
+    <div class="card">
 
-    <p class="title">Nova transação</p>
+      <p class="title">Cadastro de Transações</p>
 
-    <div class="form-group" [formGroup]="formExtrato">
+      <form  class="form-group" [formGroup]="formExtrato"  (ngSubmit) = "onSubmit()" >
 
         <label for="transação">Tipo de transação</label>
-       <select class="form"  formControlName="tipo" (change)= "consoleForm()">
-        <option value="" disabled selected hidden>Selecione um tipo</option>
-         <option value="Compra">Compra</option>
-         <option value="Venda">Venda</option>
-       </select>
+        <select class="form" formControlName="tipo" (change)="consoleForm()" required>
+          <option value="" disabled selected hidden>Selecione um tipo</option>
+          <option value="Compra">Compra</option>
+          <option value="Venda">Venda</option>
+        </select>
 
         <label for="mercadoria">Nome da mercadoria</label>
-        <input type="text" class="form" placeholder="Input" formControlName="nome" (change)= "consoleForm()">
+        <input type="text" class="form" placeholder="Input" formControlName="nome"  required minlength="4" (change)="consoleForm()">
 
         <label for="valor">Valor</label>
-        <input type="text" class="form"  placeholder="R$ 0,00" 
-        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" 
-        formControlName="valor" (change)= "consoleForm()">
+        <input type="text" class="form" placeholder="R$ 0,00" currencyMask
+          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valor" (change)="consoleForm()" required>
 
-        <div class="btn btn-primary mt-4 " (click) = "onSubmit()"> Adicionar Transação</div>
+        <button type = "submit"  class="btn btn-primary mt-4 "> Adicionar Transação</button>
+        <!-- <button type = "submit"  class="btn btn-primary mt-4 " (click)="onSubmit()" > Adicionar Transação</button> -->
+        <!-- <input type = "submit" value = "Send"> -->
+      </form>
+
     </div>
-
-</div>
-</div>
+  </div>
 
 
-<div class="col">
-<div class="extrato">
+  <div class="col">
+    <div class="extrato">
 
-    <p class="title">
+      <p class="title">Lista de Transações </p>
 
-Extrato de transações
-    </p>
-
-    <table class="table">
+      <table class="table">
         <thead>
           <tr>
             <th></th>
             <th>Mercadoria</th>
+            <th>Transação</th>
             <th>Valor</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor=" let p of page">
-          <td *ngIf="p.tipo === 'Compra'"> <i class="fas fa-minus"></i> </td>
-          <td *ngIf="p.tipo === 'Venda'">  <i class="fas fa-plus"></i> </td>
-          <td> {{p.nome}}</td>
-          <td> {{p.valor | currency:'R$' }}</td>
+            <td tooltip="Excluir transação" class="excluir" (click)=excluirTransacao(p.id)> <i
+                class="fas fa-times fa-xs"></i> </td>
+            <td> {{p.nome}}</td>
+            <td>{{p.tipo}}</td>
+            <td *ngIf="p.tipo === 'Compra'" class="redColor"> - {{p.valor | currency:'R$' }}</td>
+            <td *ngIf="p.tipo === 'Venda'" class="greenColor"> + {{p.valor | currency:'R$' }}</td>
           </tr>
-         
+
         </tbody>
       </table>
-</div>
-</div>
+    </div>
+  </div>
 
 </div>

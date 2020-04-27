@@ -6,11 +6,20 @@
 
 .btn-primary {
     color: #fff;
-    background-color: #424242;
-    border-color: #424242;
+    background-color: #017ceb;;
+    border-color: #017ceb;;
     width: 100%;
 }
 
+.title{
+    font-weight: 700;
+}
+
+.card[_ngcontent-drm-c3] {
+    border: 1px solid grey;
+    border-radius: 7px;
+    padding: 2%;
+}
 
 label{
     display: inline-block;
@@ -37,12 +46,14 @@ label{
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-@media (max-width:600px) {
-    
-    .card{
-        width: 30%;
-    }
-
-
-   
+.excluir{
+    cursor: pointer;
 }
+
+.redColor{
+    color: #e60e0e
+}
+.greenColor{
+    color: #06c215
+}
+

@@ -31,7 +31,8 @@ import { NgxCurrencyModule } from "ngx-currency";
     ChartModule,
     FormsModule, 
     ReactiveFormsModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    
   ],
   providers: [
     ExtratosService,

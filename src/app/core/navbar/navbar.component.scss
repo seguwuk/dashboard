@@ -1,12 +1,20 @@
 .nav-color{
+    
     background-color: #f0f0f0;
-    div {
 
+  
+    div {
         align-self: center;
+        color:  #231f20 !important ;
+        font-weight: 600;
     }
     div{
         .buttons{
             background-color:  #c6c9c5;
         }
     }
+}
+.nav-options{
+    color:  #231f20 !important ;
+    
 }

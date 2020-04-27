@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlApi: "https://project-f8f6e.firebaseio.com/extratos.json"
+  urlApi: "https://project-f8f6e.firebaseio.com/extratos"
 };
 
 /*
