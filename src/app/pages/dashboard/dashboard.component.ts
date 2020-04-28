@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   comprasTotal: number = 0;
   chartTrancoes: Chart;
   chartValores: Chart;
-  colors = ['#5aab89', '#de8989',];
+  colors = ['#de8989','#5aab89', ];
   backgroundColor = '#f7f7f7';
 
 
