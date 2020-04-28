@@ -1,6 +1,8 @@
 import { ExtratosService } from './../../shared/extratos.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, NgForm } from "@angular/forms";
+import { NgxSpinnerService } from "ngx-spinner";
+import toastr from "toastr";
 
 @Component({
   selector: 'app-transacoes',
@@ -17,6 +19,7 @@ export class TransacoesComponent implements OnInit {
   constructor(
     private service: ExtratosService,
     private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
@@ -27,103 +30,106 @@ export class TransacoesComponent implements OnInit {
 
 
   getExtrato() {
+    this.spinner.show();
     this.service.getData().subscribe(success => {
       // 
       let tempReturn = [success]
       this.page = []
       tempReturn.forEach(i => {
-              Object.values(i).forEach(element => {
-          console.log('opbjectelements', element)
+        Object.values(i).forEach(element => {
           this.page.push(element)
         });
       });
-      console.log(this.page)
-
+      this.spinner.hide();
     },
       err => {
-        console.log(err)
+        this.spinner.hide();
+        toastr.error('Erro ao recuperar dados. Por favor, tente novamente.')
+
       }
     )
   }
 
   onSubmit() {
-    this.service.addData(this.formExtrato.value).subscribe(retunrid => {
-      console.log(retunrid);
-      this.idTransacao = retunrid['name']
-      this.dataId = {
-        id: retunrid['name']
-      }
-      this.adicionaID()
-      err => {
+    this.spinner.show();
+    if (this.formExtrato.status === "INVALID") {
+    }
+    if (this.formExtrato.status === "VALID") {
+      this.service.addData(this.formExtrato.value).subscribe(retunrid => {
+        this.idTransacao = retunrid['name']
+        this.dataId = {
+          id: retunrid['name']
+        }
+        this.adicionaID()
+        err => {
+          this.spinner.hide();
+        }
+      }, err => {
+        this.spinner.hide();
+        toastr.error('Erro ao incluir transação.')
         console.log(err)
       }
-    }, err => {
-      console.log(err)
+      )
     }
-    )
+
   }
 
-  
-  //   onSubmit(form: NgForm) {
-  //     console.log('Your form data : ', form.value );
-  // }
 
   adicionaID() {
-    console.log(this.idTransacao)
-    console.log(this.dataId)
     this.service.addId(this.idTransacao, this.dataId).subscribe(success => {
-      console.log(success)
-      this.onRefresh()
+      toastr.success('Transação incluída com sucesso.')
+      this.ngOnInit()
+      this.spinner.hide();
 
     },
       err => {
-        console.log(err)
+        this.spinner.hide();
+        toastr.error('Erro ao incluir transação.')
       })
   }
 
 
   excluirTransacao(id) {
-    console.log(id)
-    this.service.excludeId(id).subscribe(success=>{
-      console.log(success);
-      this.onRefresh();
+    this.spinner.show();
+    this.service.excludeId(id).subscribe(success => {
+
+      this.spinner.hide();
+      toastr.success('Transação excluída com sucesso.')
+
+      this.getExtrato();
     },
-      err=>{
-        console.log(err)
+      err => {
+        this.spinner.hide();
+        toastr.error('Erro ao excluir transação.')
+
       })
-    }
-    
+  }
+
+
 
   initForm() {
     this.formExtrato = this.formBuilder.group({
-      id: '' ,
+      id: '',
       // tipo: new FormControl('', Validators.required),
       // nome: new FormControl('', Validators.required),
       // valor: new FormControl('', Validators.required),
-      tipo:  ['', Validators.required],
-      nome:  ['', Validators.required],
-      valor:  ['', Validators.required],
+      tipo: ['', Validators.required],
+      nome: ['', [Validators.required, Validators.minLength(4)]],
+      valor: ['', Validators.required],
     })
   }
 
   setForm() {
-    console.log(this.page)
     this.formExtrato.patchValue({
       tipo: this.page.tipo,
       nome: this.page.nome,
       valor: this.page.valor
     })
-
-    console.log(this.formExtrato)
   }
 
 
   consoleForm() {
-    console.log(this.formExtrato)
   }
 
-  onRefresh() {
-    this.ngOnInit()
-  }
 
 }

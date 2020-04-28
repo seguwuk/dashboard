@@ -1,8 +1,10 @@
-.card{
-    border: 1px solid grey;
+.border-card{
+    border: 1px solid #b1b1b1;
     border-radius: 7px;
-    padding: 4%;
 }
+
+
+
 
 .btn-primary {
     color: #fff;
@@ -11,8 +13,25 @@
     width: 100%;
 }
 
-.title{
-    font-weight: 700;
+.sub-title{
+    font-weight: 500;
+    color: #555556;
+}
+
+.title-cadastro{
+    font-weight: 600;
+    background-color: #95cace;
+    color: white;
+    border-radius: 5px 5px 0px 0px;
+    font-size: 1.1em;
+}
+
+.title-transacoes{
+    font-weight: 600;
+    background-color: #aa95ce;
+    color: white;
+    font-size: 1.1em;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .card[_ngcontent-drm-c3] {
@@ -48,6 +67,8 @@ label{
 
 .excluir{
     cursor: pointer;
+    text-align: center;
+    color: #f95e66;
 }
 
 .redColor{

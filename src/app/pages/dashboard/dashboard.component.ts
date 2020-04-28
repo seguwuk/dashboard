@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { ExtratosService } from 'src/app/shared/extratos.service';
+import { NgxSpinnerService } from "ngx-spinner";
+import toastr from "toastr";
 
 
 @Component({
@@ -21,6 +23,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private service: ExtratosService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
@@ -29,6 +32,7 @@ export class DashboardComponent implements OnInit {
 
 
   getExtrato() {
+    this.spinner.show();
     this.vendas = 0
     this.compras = 0
     this.comprasTotal = 0
@@ -44,26 +48,21 @@ export class DashboardComponent implements OnInit {
         });
       });
       this.page.forEach(element => {
-        console.log(element)
         if (element.tipo === "Venda") {
-          this.vendas ++ 
-          this.vendasTotal = this.vendasTotal + parseInt(element.valor, 10 )
-          console.log('venda')
+          this.vendas++
+          this.vendasTotal = this.vendasTotal + parseInt(element.valor, 10)
         }
         if (element.tipo === "Compra") {
-          this.compras ++          
-          this.comprasTotal =  this.comprasTotal + parseInt(element.valor, 10 )
-          console.log(element.valor)
-          console.log(this.comprasTotal)
-          console.log('compra')
+          this.compras++
+          this.comprasTotal = this.comprasTotal + parseInt(element.valor, 10)
         }
       });
-      console.log(this.vendas, this.compras)
       this.geraGrafico();
-
     },
       err => {
-        console.log(err)
+        this.spinner.hide();
+        toastr.error('Erro ao recuperar dados. Por favor, tente novamente.')
+
       }
     )
   }
@@ -97,43 +96,29 @@ export class DashboardComponent implements OnInit {
         ]
       },
 
-      
+
       plotOptions: {
         pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-            }
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+          }
         }
-    },
-
-    series:[
-      {
-        name: "Compras",
-        type: "column",
-        data: [this.compras]
       },
-      {
-        name: "Vendas",
-        type: "column",
-        data: [this.vendas]
-  },      
-    ]
-      // series: [
-      //   {
-      //     name: "Tipos de Transação",
-      //     type: 'column',
-      //     data: [{
-      //       name: "Compras",
-      //       y: this.compras
-      //     },
-      //     {
-      //       name: "Vendas",
-      //       y: this.vendas
-      //     }]
-      //   }
-      // ]
+
+      series: [
+        {
+          name: "Compras",
+          type: "column",
+          data: [this.compras]
+        },
+        {
+          name: "Vendas",
+          type: "column",
+          data: [this.vendas]
+        },
+      ]
     })
 
 
@@ -142,7 +127,7 @@ export class DashboardComponent implements OnInit {
         type: 'pie'
       },
       title: {
-        text: "Totais de Transações (Compra x Venda)"
+        text: "Valor de Tipos de Transações (Compra x Venda)"
       },
       exporting: {
         enabled: false
@@ -152,14 +137,14 @@ export class DashboardComponent implements OnInit {
       },
       plotOptions: {
         pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-            }
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+          }
         }
-    },
+      },
 
       series: [
         {
@@ -178,6 +163,10 @@ export class DashboardComponent implements OnInit {
 
 
     })
+
+
+        this.spinner.hide();
+  
   }
 
 
