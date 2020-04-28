@@ -20,6 +20,9 @@ export class DashboardComponent implements OnInit {
   comprasTotal: number = 0;
   chartTrancoes: Chart;
   chartValores: Chart;
+  colors = ['#5aab89', '#de8989',];
+  backgroundColor = '#f7f7f7';
+
 
   constructor(
     private service: ExtratosService,
@@ -70,7 +73,11 @@ export class DashboardComponent implements OnInit {
   geraGrafico() {
     this.chartTrancoes = new Chart({
       chart: {
-        type: 'column'
+        type: 'column',
+        backgroundColor: this.backgroundColor,
+        height: '70%',
+       
+
       },
       title: {
         text: "Número de Transações"
@@ -95,8 +102,7 @@ export class DashboardComponent implements OnInit {
           'Compra',
         ]
       },
-
-
+      colors: this.colors,
       plotOptions: {
         pie: {
           allowPointSelect: true,
@@ -124,7 +130,10 @@ export class DashboardComponent implements OnInit {
 
     this.chartValores = new Chart({
       chart: {
-        type: 'pie'
+        type: 'pie',
+        backgroundColor: this.backgroundColor,
+        height: '70%',
+
       },
       title: {
         text: "Valor de Tipos de Transações (Compra x Venda)"
@@ -135,6 +144,8 @@ export class DashboardComponent implements OnInit {
       credits: {
         enabled: false
       },
+      colors: this.colors,
+
       plotOptions: {
         pie: {
           allowPointSelect: true,
@@ -165,8 +176,8 @@ export class DashboardComponent implements OnInit {
     })
 
 
-        this.spinner.hide();
-  
+    this.spinner.hide();
+
   }
 
 
