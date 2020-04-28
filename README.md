@@ -1,3 +1,18 @@
+# Dashboard
+
+Projeto exemplo para mostrar consumo de uma API via interface Angular, utilizando o FireBase como API.
+Possui 2 telas:
+
+## Transações
+Tela permite adicionar ou excluir transações, que ficam amarzenadas no bd Firebase e alimentam os gráficos.
+
+## Dashboard
+Exibe 2 comparativos de transações realizadas: Número de Transações e Total de Valor de Transações.
+
+
+
+# Informações técnicas
+
 # interface
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.
