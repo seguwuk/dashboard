@@ -24,7 +24,7 @@
     "@types/highcharts": "^5.0.36",
     "angular-highcharts": "^9.0.9",
     "bootstrap": "^4.4.1",
-    "highcharts": "^8.0.4",
+    "highcharts": "^8.1.1",
     "highcharts-angular": "^2.4.0",
     "jquery": "^3.5.0",
     "ngx-currency": "^2.3.3",
